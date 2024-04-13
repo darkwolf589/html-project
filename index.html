@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkliste</title>
+</head>
+<body>
+
+<form id="checklistForm">
+<div>
+<input type="checkbox" id="affirmationen" value="Affirmationen">Affirmationen<br>
+<input type="checkbox" id="journaling" value="Journaling">Journaling<br>
+<input type="checkbox" id="zieleVisualisieren" value="Zielevisualisieren">Ziele zu visualisieren<br>
+<input type="checkbox" id="whm" value="WHM">Wim Hof Atemtechnik<br>
+<input type="checkbox" id="stretching" value="Stretching">Dehnen & Mobility<br>
+<input type="checkbox" id="meditieren" value="Meditieren">Meditation<br>
+</div>
+<button type="submit">Bestätigen</button>
+</form>
+
+<div id="streak">Streak: 0</div>
+
+<button id="counterBtn">Zähler: 0</button>
+
+<script>
+const form = document.querySelector('#checklistForm');
+const streakDisplay = document.querySelector('#streak');
+const counterBtn = document.querySelector('#counterBtn');
+const checkboxes = document.querySelectorAll('[type="checkbox"]');
+
+let streak = 0;
+let counter = 0;
+
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    let checkedCount = 0;
+
+    checkboxes.forEach(item => {
+        if (item.checked) {
+            checkedCount++;
+        }
+    });
+
+    streak = checkedCount >= 5 ? streak + 1 : 0;
+
+    streakDisplay.textContent = 'Streak: ' + streak;
+
+    checkboxes.forEach(item => {
+        item.checked = false;
+    });
+});
+
+counterBtn.addEventListener('click', () => {
+    counter++;
+    counterBtn.textContent = 'Zähler: ' + counter;
+});
+</script>
+
+</body>
+</html>
